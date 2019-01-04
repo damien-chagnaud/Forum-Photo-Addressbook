@@ -1,0 +1,39 @@
+imports:
+    - { resource: parameters.yml }
+
+services:
+    forumphoto.addressbook.admin.controller:
+        class: forumphoto\addressbook\controller\admin_controller
+        arguments:
+            - '@cache.driver'
+            - '@controller.helper'
+            - '@language'
+            - '@log'
+            - '@dbal.conn'
+            - '@request'
+            - '@template'
+            - '@user'
+            - '@service_container'
+            - '@dispatcher'
+            - '%core.root_path%'
+            - '%core.php_ext%'
+            - '%forumphoto.addressbook.dbprefix%'
+            
+    forumphoto.addressbook.controller:
+        class: forumphoto\addressbook\controller\main
+        arguments:
+            - '@config'
+            - '@controller.helper'
+            - '@template'
+            - '@user'
+            
+    forumphoto.addressbook.listener:
+        class: forumphoto\addressbook\event\main_listener
+        arguments:
+            - '@controller.helper'
+            - '@template'
+            - '@user'
+            - '%core.php_ext%'
+        tags:
+            - { name: event.listener }
+            

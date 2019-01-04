@@ -1,0 +1,163 @@
+<!-- INCLUDE overall_header.html -->
+
+{% INCLUDECSS 'https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css' %}
+{% INCLUDEJS 'https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js' %}
+
+
+<h1>{L_ACP_FP_ADDBK_TITLE}</h1>
+
+
+{% if S_NEW_PAGE or S_EDIT_PAGE %}
+	<form id="new_edit_page" method="post" action="{{ U_ACTION }}">
+		<fieldset>
+			<dl>
+				<dt><label for="addrs_USERID">{{ lang('ACP_ADDRS_FORM_USERID')}}</label><br /></dt>
+				<dd><input class="text medium" type="text" id="addrs_USERID" name="addrs_USERID" value="{{ ADDRS_USERID }}" maxlength="200" /></dd>
+			</dl>
+			<dl>
+				<dt><label for="addrs_TYPE">{{ lang('ACP_ADDRS_FORM_TYPE')}}</label><br /></dt>
+				<dd>
+					<select class="select" name="addrs_TYPE" id="addrs_TYPE">
+						<option value="0" {% if ADDRS_TYPE==0 %} selected {% endif %} >{{ lang('ADDRS_TYPE_ASSO')}}</option>
+						<option value="1" {% if ADDRS_TYPE==1 %} selected {% endif %} >{{ lang('ADDRS_TYPE_PRO')}}</option>
+						<option value="2" {% if ADDRS_TYPE==2 %} selected {% endif %} >{{ lang('ADDRS_TYPE_STORE')}}</option>
+						<option value="3" {% if ADDRS_TYPE==3 %} selected {% endif %} >{{ lang('ADDRS_TYPE_PRINT')}}</option>
+					</select>
+				</dd>
+			</dl>
+			<dl>
+				<dt><label for="addrs_LOCATION">{{ lang('ACP_ADDRS_FORM_LOCATION')}}</label><br /></dt>
+				<dd><input class="text medium" type="text" id="addrs_LOCATION" name="addrs_LOCATION" value="{{ ADDRS_LOCATION }}" maxlength="200" /></dd>
+			</dl>
+			<dl>
+				<dt><label for="addrs_NAME">{{ lang('ACP_ADDRS_FORM_NAME')}}</label><br /></dt>
+				<dd><input class="text medium" type="text" id="addrs_NAME" name="addrs_NAME" value="{{ ADDRS_NAME }}" maxlength="200" /></dd>
+			</dl>
+			<dl>
+				<dt><label for="addrs_ADDRESS">{{ lang('ACP_ADDRS_FORM_ADDRESS')}}</label><br /></dt>
+				<dd><input class="text medium" type="text" id="addrs_ADDRESS" name="addrs_ADDRESS" value="{{ ADDRS_ADDRESS }}" maxlength="200" /></dd>
+			</dl>
+			<dl>
+				<dt><label for="addrs_TEL">{{ lang('ACP_ADDRS_FORM_TEL')}}</label><br /></dt>
+				<dd><input class="text medium" type="text" id="addrs_TEL" name="addrs_TEL" value="{{ ADDRS_TEL }}" maxlength="200" /></dd>
+			</dl>
+			<dl>
+				<dt><label for="addrs_CEL">{{ lang('ACP_ADDRS_FORM_CEL')}}</label><br /></dt>
+				<dd><input class="text medium" type="text" id="addrs_CEL" name="addrs_CEL" value="{{ ADDRS_CEL }}" maxlength="200" /></dd>
+			</dl>
+			<dl>
+				<dt><label for="addrs_POSLONG">{{ lang('ACP_ADDRS_FORM_POSLONG')}}</label><br /></dt>
+				<dd><input class="text medium" type="text" id="addrs_POSLONG" name="addrs_POSLONG" value="{{ ADDRS_POSLONG }}" maxlength="200" /></dd>
+			</dl>
+			<dl>
+				<dt><label for="addrs_POSLAT">{{ lang('ACP_ADDRS_FORM_POSLAT')}}</label><br /></dt>
+				<dd><input class="text medium" type="text" id="addrs_POSLAT" name="addrs_POSLAT" value="{{ ADDRS_POSLAT }}" maxlength="200" /></dd>
+			</dl>
+			<dl>
+				<dt><label for="addrs_PRESENTATION">{{ lang('ACP_ADDRS_FORM_PRESENTATION')}}</label><br /></dt>
+				<dd><input class="text medium" type="text" id="addrs_PRESENTATION" name="addrs_PRESENTATION" value="{{ ADDRS_PRESENTATION }}" maxlength="200" /></dd>
+			</dl>
+			<dl>
+				<dt><label for="addrs_WEBSITE">{{ lang('ACP_ADDRS_FORM_WEBSITE')}}</label><br /></dt>
+				<dd><input class="text medium" type="text" id="addrs_WEBSITE" name="addrs_WEBSITE" value="{{ ADDRS_WEBSITE }}" maxlength="200" /></dd>
+			</dl>
+			<dl>
+				<dt><label for="addrs_EMAIL">{{ lang('ACP_ADDRS_FORM_EMAIL')}}</label><br /></dt>
+				<dd><input class="text medium" type="text" id="addrs_EMAIL" name="addrs_EMAIL" value="{{ ADDRS_EMAIL }}" maxlength="200" /></dd>
+			</dl>
+
+		</fieldset>
+		{% if S_EDIT_ADDRS %}
+			<input type="hidden" name="addrs_ID" value="{{ ADDRS_ID }}" />
+		{% else %}
+		<fieldset class="submit-buttons">
+			<input class="button1" type="submit" id="submit" name="submit" value="{{ lang('SUBMIT') }}" />&nbsp;
+			<input class="button2" type="reset" id="reset" name="reset" value="{{ lang('RESET') }}" />
+			{{ S_FORM_TOKEN }}
+		</fieldset>
+		{% endif %}
+	</form>
+
+{% else %}
+
+	<fieldset>
+	
+		<h3>{ADDRESS}</h3>
+		<legend>{L_ACP_FP_ADDBK_MANAGE_TITLE}</legend>
+		<table id="myTable" class="display" style="width:100%">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>User ID</th>
+					<th>Type</th>
+					<th>Location</th>
+					<th>Name</th>
+					<th>Address</th>
+					<th>Tel</th>
+					<th>Cel</th>
+					<th>PosLong</th>
+					<th>PosLat</th>
+					<th>Presentation</th>
+					<th>Website</th>
+					<th>E-mail</th>
+					<th>Tools</th>
+				</tr>
+			</thead>
+			<tbody>
+			   {% for address in addresss %}
+				<tr>
+					<td>{{ address.ADDRS_ID }}</td>
+					<td>{{ address.ADDRS_USERID }}</td>
+					<td>{{ address.ADDRS_TYPE }}</td>
+					<td>{{ address.ADDRS_LOCATION }}</td>
+					<td>{{ address.ADDRS_NAME }}</td>
+					<td>{{ address.ADDRS_ADDRESS }}</td>
+					<td>{{ address.ADDRS_TEL }}</td>
+					<td>{{ address.ADDRS_CEL }}</td>
+					<td>{{ address.ADDRS_POSLONG }}</td>
+					<td>{{ address.ADDRS_POSLAT }}</td>
+					<td>{{ address.ADDRS_PRESENTATION }}</td>
+					<td>{{ address.ADDRS_WEBSITE }}</td>
+					<td>{{ address.ADDRS_EMAIL }}</td>
+					<td><a href="{{ address.U_EDIT }}">{{ ICON_EDIT }}</a> <a href="{{ address.U_DELETE }}" data-ajax="row_delete">{{ ICON_DELETE }}</a></td>
+				</tr>
+			{% endfor %}
+			</tbody>
+			<tfoot>
+				<tr>
+					<th>ID</th>
+					<th>User ID</th>
+					<th>Type</th>
+					<th>Location</th>
+					<th>Name</th>
+					<th>Address</th>
+					<th>Tel</th>
+					<th>Cel</th>
+					<th>PosLong</th>
+					<th>PosLat</th>
+					<th>Presentation</th>
+					<th>Website</th>
+					<th>E-mail</th>
+					<th>Tools</th>
+				</tr>
+			</tfoot>
+		</table>
+	</fieldset>
+
+	<form id="pages_add_page" method="post" action="{{ U_ACTION }}">
+		<fieldset class="quick">
+			<input class="button2" type="submit" name="addpage" value="{{ lang('ACP_ADDBK_NEW_ADDRS') }}" />
+			<input type="hidden" name="action" value="new" />
+			{{ S_FORM_TOKEN }}
+		</fieldset>
+	</form>
+
+{% endif %}
+
+<!-- INCLUDE overall_footer.html -->
+
+<script>
+	$(document).ready( function () {
+		$('#myTable').DataTable();
+	} );
+</script>

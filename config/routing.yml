@@ -1,0 +1,3 @@
+forumphoto_addressbook_controller:
+    path: /addressbook/{name}
+    defaults: { _controller: forumphoto.addressbook.controller:handle }

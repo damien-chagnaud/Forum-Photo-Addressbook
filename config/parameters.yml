@@ -1,0 +1,3 @@
+parameters:
+    forumphoto.addressbook.tables.addressbook: '%core.table_prefix%addressbook'
+    forumphoto.addressbook.dbprefix: '%core.table_prefix%'

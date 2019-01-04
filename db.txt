@@ -1,0 +1,1 @@
+id, userid, type, location, name, address, tel, cel, poslong, poslat, presentation, website, email

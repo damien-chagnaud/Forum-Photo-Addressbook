@@ -1,0 +1,88 @@
+<!-- INCLUDE ucp_header.html -->
+
+<h2>{L_UCP_FP_ADDBK_TITLE}</h2>
+
+	{% if USERINGROUP==true %}
+		
+		<form id="ucp" method="post" action="{S_UCP_ACTION}">
+			<div class="panel">
+				<div class="inner">
+					<fieldset>
+						<dl>
+							<dt><label for="addrs_TYPE">{{ lang('UCP_ADDRS_FORM_TYPE')}}</label><br /></dt>
+							<dd>
+								<select class="select" name="addrs_TYPE" id="addrs_TYPE">
+									<option value="0" {% if UCP_ADDRS_TYPE==0 %} selected {% endif %} >{{ lang('UCP_ADDRS_TYPE_ASSO')}}</option>
+									<option value="1" {% if UCP_ADDRS_TYPE==1 %} selected {% endif %} >{{ lang('UCP_ADDRS_TYPE_PRO')}}</option>
+									<option value="2" {% if UCP_ADDRS_TYPE==2 %} selected {% endif %} >{{ lang('UCP_ADDRS_TYPE_STORE')}}</option>
+									<option value="3" {% if UCP_ADDRS_TYPE==3 %} selected {% endif %} >{{ lang('UCP_ADDRS_TYPE_PRINT')}}</option>
+								</select>
+							</dd>
+						</dl>
+						<dl>
+							<dt><label for="addrs_LOCATION">{{ lang('UCP_ADDRS_FORM_LOCATION')}}</label><br /></dt>
+							<dd><input class="text medium" type="text" id="addrs_LOCATION" name="addrs_LOCATION" value="{{ ADDRS_LOCATION }}" maxlength="200" /></dd>
+						</dl>
+						<dl>
+							<dt><label for="addrs_NAME">{{ lang('UCP_ADDRS_FORM_NAME')}}</label><br /></dt>
+							<dd><input class="text medium" type="text" id="addrs_NAME" name="addrs_NAME" value="{{ ADDRS_NAME }}" maxlength="200" /></dd>
+						</dl>
+						<dl>
+							<dt><label for="addrs_ADDRESS">{{ lang('UCP_ADDRS_FORM_ADDRESS')}}</label><br /></dt>
+							<dd><input class="text medium" type="text" id="addrs_ADDRESS" name="addrs_ADDRESS" value="{{ ADDRS_ADDRESS }}" maxlength="200" /></dd>
+						</dl>
+						<dl>
+							<dt><label for="addrs_TEL">{{ lang('UCP_ADDRS_FORM_TEL')}}</label><br /></dt>
+							<dd><input class="text medium" type="text" id="addrs_TEL" name="addrs_TEL" value="{{ ADDRS_TEL }}" maxlength="200" /></dd>
+						</dl>
+						<dl>
+							<dt><label for="addrs_CEL">{{ lang('UCP_ADDRS_FORM_CEL')}}</label><br /></dt>
+							<dd><input class="text medium" type="text" id="addrs_CEL" name="addrs_CEL" value="{{ ADDRS_CEL }}" maxlength="200" /></dd>
+						</dl>
+						<dl>
+							<dt><label for="addrs_POSLONG">{{ lang('UCP_ADDRS_FORM_POSLONG')}}</label><br /></dt>
+							<dd><input class="text medium" type="text" id="addrs_POSLONG" name="addrs_POSLONG" value="{{ ADDRS_POSLONG }}" maxlength="200" /></dd>
+						</dl>
+						<dl>
+							<dt><label for="addrs_POSLAT">{{ lang('UCP_ADDRS_FORM_POSLAT')}}</label><br /></dt>
+							<dd><input class="text medium" type="text" id="addrs_POSLAT" name="addrs_POSLAT" value="{{ ADDRS_POSLAT }}" maxlength="200" /></dd>
+						</dl>
+						<dl>
+							<dt><label for="addrs_PRESENTATION">{{ lang('UCP_ADDRS_FORM_PRESENTATION')}}</label><br /></dt>
+							<dd><input class="text medium" type="text" id="addrs_PRESENTATION" name="addrs_PRESENTATION" value="{{ ADDRS_PRESENTATION }}" maxlength="200" /></dd>
+						</dl>
+						<dl>
+							<dt><label for="addrs_WEBSITE">{{ lang('UCP_ADDRS_FORM_WEBSITE')}}</label><br /></dt>
+							<dd><input class="text medium" type="text" id="addrs_WEBSITE" name="addrs_WEBSITE" value="{{ ADDRS_WEBSITE }}" maxlength="200" /></dd>
+						</dl>
+						<dl>
+							<dt><label for="addrs_EMAIL">{{ lang('UCP_ADDRS_FORM_EMAIL')}}</label><br /></dt>
+							<dd><input class="text medium" type="text" id="addrs_EMAIL" name="addrs_EMAIL" value="{{ ADDRS_EMAIL }}" maxlength="200" /></dd>
+						</dl>
+						<input type="hidden" name="addrs_ID" value="{{ ADDRS_ID }}" />
+						
+					</fieldset>
+
+					<fieldset>
+						<dl>
+							<dt>&nbsp;</dt>
+							<dd><input type="submit" name="submit" id="submit" class="button1" value="{L_SUBMIT}" tabindex="2" />&nbsp;
+								<input type="reset" value="{L_RESET}" name="reset" class="button2" /></dd>
+						</dl>
+						{S_HIDDEN_FIELDS}
+						{S_FORM_TOKEN}
+					</fieldset>
+				</div>
+			</div>
+		</form>
+	{% else %}
+		<div class="panel">
+			<div class="inner">
+				{{ lang('UCP_FP_ADDBK_NOTINGROUP')}}
+			</div>
+		</div>
+	{% endif %}
+
+
+<!-- INCLUDE ucp_footer.html -->
+

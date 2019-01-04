@@ -1,0 +1,26 @@
+<!-- INCLUDE overall_header.html -->
+
+<h1>{L_ACP_FP_ADDBK_SETTINGS_TITLE}</h1>
+
+	<form id="addbk_settings" method="post" action="{{ U_ACTION }}">
+		<fieldset>
+			<dl>
+				<dt><label for="addbk_settings_group">{{ lang('ACP_ADDRS_STGS_FORM_GROUP')}}</label><br /></dt>
+				<dd>
+					<select class="select" name="addbk_settings_group" id="addbk_settings_group">
+						{% for group in groups %}
+							<option value="{{ group.ID }}" {% if group.ID == CONFIG_GROUP %} selected {% endif %} >{{ lang(group.NAME) }}</option>
+						{% endfor %}
+					</select>
+				</dd>
+			</dl>
+			<p class="submit-buttons">
+				<input class="button1" type="submit" id="submit" name="submit" value="{L_SAVE}" />&nbsp;
+			</p>
+			{{ S_FORM_TOKEN }}
+		</fieldset>
+
+	</form>
+
+<!-- INCLUDE overall_footer.html -->
+
